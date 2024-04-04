@@ -110,7 +110,7 @@ bool SerialPort::get_Mode()
     // bytes = read(fd, rdata, 49);
     bytes = read(fd, rdata, 50);
     // bytes = read(fd, rdata, 45);
-    // cout<<bytes<<endl;
+    //cout<<"bytes"<<bytes<<endl;
 
     if (rdata[0] == 0xA5 && Verify_CRC8_Check_Sum(rdata, 3))
     {
@@ -359,7 +359,6 @@ void SerialPort::TransformData(const VisionData &data)
     Tdata[4] = data.pitch_angle.c[1];
     Tdata[5] = data.pitch_angle.c[2];
     Tdata[6] = data.pitch_angle.c[3];
-
     Tdata[7] = data.yaw_angle.c[0];
     Tdata[8] = data.yaw_angle.c[1];
     Tdata[9] = data.yaw_angle.c[2];
@@ -378,8 +377,12 @@ void SerialPort::TransformData(const VisionData &data)
     Tdata[19] = 0x00;
 
 	Append_CRC16_Check_Sum(Tdata, 22);
-    //fmt::print("serialport is {} \n",Tdata);
-}
+ 
+    // for(int i = 0;i < 22;i++){
+    //     printf("串口信息%d:",i);
+    //     printf("%x\n",Tdata[i]);
+    // }
+ }
 
 /////////////////////////////////////////////
 /**
@@ -412,7 +415,7 @@ bool SerialPort::getQuat(unsigned char *data)
     quat[1] = exchange_data(f2);
     quat[2] = exchange_data(f3);
     quat[3] = exchange_data(f4);
-    fmt::print(fmt::fg(fmt::color::white), "quat: {} {} {} {} \n", quat[0], quat[1], quat[2], quat[3]);
+    //fmt::print(fmt::fg(fmt::color::white), "quat: {} {} {} {} \n", quat[0], quat[1], quat[2], quat[3]);
     return true;
 }
 
@@ -432,7 +435,7 @@ bool SerialPort::getGyro(unsigned char *data)
     gyro[1] = exchange_data(f2);
     gyro[2] = exchange_data(f3);
 
-    fmt::print(fmt::fg(fmt::color::white), "gyro: {} {} {} \n", gyro[0], gyro[1], gyro[2]);
+    //fmt::print(fmt::fg(fmt::color::white), "gyro: {} {} {} \n", gyro[0], gyro[1], gyro[2]);
     return true;
 }
 
@@ -451,7 +454,7 @@ bool SerialPort::getAcc(unsigned char *data)
     acc[0] = exchange_data(f1);
     acc[1] = exchange_data(f2);
     acc[2] = exchange_data(f3);
-    fmt::print(fmt::fg(fmt::color::white), "acc: {} {} {} \n", acc[0], acc[1], acc[2]);
+   // fmt::print(fmt::fg(fmt::color::white), "acc: {} {} {} \n", acc[0], acc[1], acc[2]);
     return true;
 }
 /**
@@ -466,7 +469,7 @@ bool SerialPort::getSpeed(unsigned char *data)
 
     bullet_speed = exchange_data(f1);
 
-    fmt::print(fmt::fg(fmt::color::white), "speed: {} \n", bullet_speed);
+    //fmt::print(fmt::fg(fmt::color::white), "speed: {} \n", bullet_speed);
     return true;
 }
 //////////////////////////////////////////////

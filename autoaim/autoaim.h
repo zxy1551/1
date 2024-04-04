@@ -2,7 +2,7 @@
  * @Author: Your Name your.email@example.com
  * @Date: 2023-12-19 01:23:33
  * @LastEditors: Your Name your.email@example.com
- * @LastEditTime: 2024-02-27 01:02:14
+ * @LastEditTime: 2024-04-01 13:45:12
  * @FilePath: /TUP-InfantryVision-2022-main/autoaim/autoaim.h
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -64,7 +64,7 @@ private:
     const int max_armors = 8;                   //视野中最多装甲板数
     const int max_dead_buffer = 2;              //允许因击打暂时熄灭的装甲板的出现次数
     const double max_delta_dist = 0.3;          //两次预测间最大速度(m/s)
-    const double armor_conf_high_thres = 0.60;  //置信度大于该值的装甲板直接采用
+    const double armor_conf_high_thres = 0.80;  //置信度大于该值的装甲板直接采用
     // const int max_delta_t = 50;              //使用同一预测器的最大时间间隔(ms)
     const int max_delta_t = 50;                //使用同一预测器的最大时间间隔(ms)
 

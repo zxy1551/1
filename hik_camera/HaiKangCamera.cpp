@@ -74,6 +74,13 @@ int HaiKangCamera::StartDevice(int serial_number)
 
     return serial_number;
 }
+// bool HaiKangCamera::SetRate(float fValue){
+//     this->nRet = MV_CC_SetFrameRate(handle, fValue);
+//     if(MV_OK != nRet){
+//         fmt::print(fmt::fg(fmt::color::red), "[Camera] SetRate failed! nRet [%x]!\n", nRet);
+//         return false;
+//     }
+// }
 
 bool HaiKangCamera::SetStreamOn()
 {   //开始采集

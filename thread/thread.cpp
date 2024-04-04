@@ -55,13 +55,14 @@ G_DAHENG
     // HaiKang.SetGAIN(0, 16);
     // HaiKang.SetGAIN(1, 8);
     // HaiKang.SetGAIN(2, 8);
-    HaiKang.SetGAIN(1, 12);
+    HaiKang.SetGAIN(1, 17);
     // 是否启用自动白平衡7
     // HaiKang.Set_BALANCE_AUTO(0);
     // manual白平衡 BGR->012
     HaiKang.Set_BALANCE(0, 1690);
     HaiKang.Set_BALANCE(1, 1024);
     HaiKang.Set_BALANCE(2, 2022);
+   // HaiKang.SetRate(70);
 #endif //USING_HIK
 
 #ifdef USING_USB_CAMERA
@@ -90,14 +91,14 @@ G_DAHENG
     char now[64];
     std::time_t tt;
     struct tm *ttime;
-    int width = 1280;
-    int height = 1024;
+    int width = 1440;
+    int height = 1080;
     tt = time(nullptr);
     ttime = localtime(&tt);
     strftime(now, 64, "%Y-%m-%d_%H_%M_%S", ttime);  // 以时间为名字
     std::string now_string(now);
     std::string path(std::string(storage_location + now_string).append(".avi"));
-    auto writer = cv::VideoWriter(path, cv::VideoWriter::fourcc('M', 'J', 'P', 'G'), 30.0, cv::Size(width, height));    // Avi format
+    auto writer = cv::VideoWriter(path, cv::VideoWriter::fourcc('X', 'V', 'I','D'), 30.0, cv::Size(width, height));    // Avi format
     std::future<void> write_video;
     bool is_first_loop = true;
     #ifdef SAVE_LOG_ALL
@@ -107,25 +108,25 @@ G_DAHENG
 
 #ifdef RECORD_DATA
     /*============ video_writer ===========*/
-    int frame_cnt = 0;
-    char now[64];
-    std::time_t tt;
-    struct tm *ttime;
-    int width = 1280;
-    int height = 1024;
-    tt = time(nullptr);
-    ttime = localtime(&tt);
-    strftime(now, 64, "%Y-%m-%d_%H_%M_%S", ttime);  // 以时间为名字
-    std::string now_string(now);
-    const std::string storage_location = "../record/" + now_string;
-    //Create dir to store datas.
-    mkdir(storage_location.c_str(), S_IRWXU);
-    fmt::print(fmt::fg(fmt::color::green), "[RECORD] Created directory :{}\n",storage_location);
-    string data_file_pth = storage_location + "/" + "data.txt";
-    string video_file_pth = storage_location + "/" + "video.avi";
-    ofstream data;
-    data.open(data_file_pth, std::ofstream::app);
-    auto writer = cv::VideoWriter(video_file_pth, cv::VideoWriter::fourcc('M', 'J', 'P', 'G'), 60.0, cv::Size(width, height));    // Avi format
+    //int frame_cnt = 0;
+    //char now[64];
+   // std::time_t tt;
+    //struct tm *ttime;
+    // int width = 1280;
+    // int height = 1024;
+    // tt = time(nullptr);
+    // ttime = localtime(&tt);
+    // strftime(now, 64, "%Y-%m-%d_%H_%M_%S", ttime);  // 以时间为名字
+    // std::string now_string(now);
+    // const std::string storage_location = "../record/" + now_string;
+    // //Create dir to store datas.
+    // mkdir(storage_location.c_str(), S_IRWXU);
+    // fmt::print(fmt::fg(fmt::color::green), "[RECORD] Created directory :{}\n",storage_location);
+    // string data_file_pth = storage_location + "/" + "data.txt";
+    // string video_file_pth = storage_location + "/" + "video.mp4";
+    // ofstream data;
+    // data.open(data_file_pth, std::ofstream::app);
+    // auto writer = cv::VideoWriter(video_file_pth, cv::VideoWriter::fourcc('M', 'J', 'P', 'G'), 60.0, cv::Size(width, height));    // Avi format
 #endif //RECORD_DATA
     while(1)
     {
@@ -160,7 +161,7 @@ G_DAHENG
 
             goto start_get_img;
         }
-        src.timestamp = (int)(std::chrono::duration<double,std::milli>(time_cap - time_start).count());
+         src.timestamp = (int)(std::chrono::duration<double,std::milli>(time_cap - time_start).count());
 #endif //USING_HIK
 
 #ifdef USING_VIDEO
@@ -191,9 +192,12 @@ G_DAHENG
             //异步读写加速,避免阻塞生产者
             if (is_first_loop)
                 is_first_loop = false;
+               //  LOG(INFO) << "[SAVE_VIDEO] Save video to " << path;
             else
                 write_video.wait();
+                 //LOG(ERROR) << "[CAMERA] Get empty video";
             write_video = std::async(std::launch::async, [&, src](){writer.write(src.img);});
+             LOG(INFO) << "[SAVE_VIDEO] Save video to " << path;
         }
 #endif //SAVE_VIDEO
 
@@ -211,6 +215,7 @@ G_DAHENG
         //用于辅助标注
         factory.produce(src);
     }
+    
     return true;
 }
 
@@ -266,6 +271,7 @@ bool consumer(Factory<TaskData> &task_factory,Factory<VisionData> &transmit_fact
             transmit_factory.produce(data);
         }
     }
+    
     return true;
 }
 
@@ -294,10 +300,10 @@ bool dataTransmitter(SerialPort &serial,Factory<VisionData> &transmit_factory)
                     LOG(ERROR) << "[TRANSMITTER] Serial offline, trying to reconnect...";
                 #endif //SAVE_LOG_ALL
             #endif //DEBUG_WITHOUT_COM
-            usleep(5000);
+            usleep(500);
             continue;
         }
-        
+       // usleep(5000);
         serial.TransformData(transmit);
         serial.send();
         //LOG(WARNING) << "频率：" << i++;

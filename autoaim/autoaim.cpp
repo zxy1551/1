@@ -52,7 +52,7 @@ Autoaim::~Autoaim()
 #ifdef USING_ROI
 Point2i Autoaim:: cropImageByROI(Mat &img)
 {
-     cout<<"lost:"<<lost_cnt<<endl;
+     //cout<<"lost:"<<lost_cnt<<endl;
     //若上次不存在目标
 
     //FIXME:自适应大小ROI截取可能存在Bug
@@ -77,10 +77,10 @@ Point2i Autoaim:: cropImageByROI(Mat &img)
     }
     int max_expand = (img.size().height - input_size.height) / 2;
     int expand_value = (int)((area_ratio / no_crop_ratio) * max_expand) / 32 * 32;
-     cout<<"last roi中心点:"<<last_roi_center<<endl;
+     //cout<<"last roi中心点:"<<last_roi_center<<endl;
     // Size2i cropped_size = input_size;
     Size2i cropped_size = {input_size + Size2i(expand_value, expand_value)};
-     cout<<cropped_size<<"roi大小"<<expand_value<<endl;
+     //cout<<cropped_size<<"roi大小"<<expand_value<<endl;
     if (cropped_size.width >= img.size().width)
         cropped_size.width = img.size().width;
     if (cropped_size.height >= img.size().height)
@@ -102,9 +102,9 @@ Point2i Autoaim:: cropImageByROI(Mat &img)
     // auto offset = last_roi_center - Point2i(roi_width / 2, roi_height / 2);
     Rect roi_rect = Rect(offset, cropped_size);
     img(roi_rect).copyTo(img);
-    cout<< "左上角顶点："<< offset;
+    //cout<< "左上角顶点："<< offset;
     //namedWindow("roi"，img);
-    imshow("roi",img);
+    //imshow("roi",img);
 
     return offset;
 }
@@ -404,7 +404,7 @@ bool Autoaim::run(TaskData &src,VisionData &data)
 #endif //USING_SPIN_DETECT
         lost_cnt++;
         is_last_target_exists = false;
-        data = {(float)0, (float)0, (float)0, 0, 0, 0, 1};
+        data = {(float)0, (float)0, (float)0, 0, 0, 0, 0};
         LOG(WARNING) <<"[AUTOAIM] No target detected!";
         return false;
     }
@@ -422,7 +422,7 @@ bool Autoaim::run(TaskData &src,VisionData &data)
     ///------------------------生成装甲板对象----------------------------------------------
     for (auto object : objects)
     {
-        cout<<"offset:"<<roi_offset<<endl;
+        //cout<<"offset:"<<roi_offset<<endl;
         Armor armor;
         armor.id = object.cls;
         armor.color = object.color;
@@ -556,12 +556,13 @@ bool Autoaim::run(TaskData &src,VisionData &data)
         imshow("dst",src.img);
         waitKey(1);
 #endif //SHOW_IMG
+//是否检测陀螺
 #ifdef USING_SPIN_DETECT
         updateSpinScore();
 #endif //USING_SPIN_DETECT
         lost_cnt++;
         is_last_target_exists = false;
-        data = {(float)0, (float)0, (float)0, 0, 0, 0, 1};
+        data = {(float)0, (float)0, (float)0, 0, 0, 0, 0};
         LOG(WARNING) <<"[AUTOAIM] No available armor exists!";
         return false;
     }
@@ -775,7 +776,7 @@ bool Autoaim::run(TaskData &src,VisionData &data)
 #endif //SHOW_IMG
         lost_cnt++;
         is_last_target_exists = false;
-        data = {(float)0, (float)0, (float)0, 0, 0, 0, 1};
+        data = {(float)0, (float)0, (float)0, 0, 0, 0, 0};
         LOG(WARNING) <<"[AUTOAIM] No available tracker exists!";
         return false;
     }
@@ -1016,13 +1017,13 @@ bool Autoaim::run(TaskData &src,VisionData &data)
             line(src.img, armor.apex2d[i % 4], armor.apex2d[(i + 1) % 4], {0,255,0}, 1);
         rectangle(src.img, armor.roi, {255, 0, 255}, 1);
         auto armor_center = coordsolver.reproject(armor.center3d_cam);
-        //circle(src.img, armor_center, 4, {0, 0, 255}, 2);
+        circle(src.img, armor_center, 4, {0, 0, 255}, 2);
     }
 #endif //SHOW_ALL_ARMOR
 
 #ifdef SHOW_PREDICT
     auto aiming_2d = coordsolver.reproject(aiming_point);
-    //circle(src.img, aiming_2d, 2, {0, 255, 255}, 2);
+    circle(src.img, aiming_2d, 2, {0, 255, 255}, 2);
 #endif //SHOW_PREDICT
 
     auto angle = coordsolver.getAngle(aiming_point, rmat_imu);
@@ -1082,6 +1083,6 @@ bool Autoaim::run(TaskData &src,VisionData &data)
         return false;
     }
 
-    data = {(float)angle[1], (float)angle[0], (float)target.center3d_cam.norm(), is_target_switched, 1, is_target_spinning, 0};
+    data = {(float)angle[1], (float)angle[0], (float)target.center3d_cam.norm(), is_target_switched, 1, is_target_spinning, 1};
     return true;
 }

@@ -2,7 +2,7 @@
  * @Author: Your Name your.email@example.com
  * @Date: 2023-12-19 01:23:33
  * @LastEditors: Your Name your.email@example.com
- * @LastEditTime: 2024-01-31 00:52:00
+ * @LastEditTime: 2024-03-29 00:07:51
  * @FilePath: /TUP-InfantryVision-2022-main/general/general.h
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -35,10 +35,10 @@ using namespace cv;
 
 // const string camera_name = "KE0200110076";  // 哨兵下云台
 //const string camera_name = "KE0200110075";     // 步兵（4号)
- const string camera_name = "KE0200110074";  // 步兵（5号）
+//const string camera_name = "KE0200110074";  // 步兵（5号）icbk步兵
 // const string camera_name = "KE0200110073";  // 英雄
 // const string camera_name = "MV_Sentry";     // 哨兵上云台
-// const string camera_name = "00J90630561";     // 5号blancer步兵
+const string camera_name = "00J90630561";     // 5号blancer步兵(icbk哨兵)
 
 
 enum TargetType {SMALL, BIG, BUFF};

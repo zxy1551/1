@@ -10,8 +10,8 @@
 //const string SERIAL_ID = "1a86/7523/263";
 // const string SERIAL_ID = "10c4/ea60/100";
 
-const string SERIAL_ID = "1a86/7523/264";   //
-//const string SERIAL_ID = "403/6001/600";
+const string SERIAL_ID = "1a86/7523/264";   //ch340
+//const string SERIAL_ID = "403/6001/600";//ft232，贵
 const int BAUD = 115200;
 // const int BAUD_IMU = 460800;
 
@@ -27,9 +27,9 @@ int main(int argc,char* argv[])
     // FLAGS_max_log_size = 10;  //日志文件大小(单位：MB)
     // FLAGS_stop_logging_if_full_disk = true; //磁盘满时是否记录到磁盘
 
-    google::SetLogDestination(google::GLOG_INFO,"/home/icbk/Desktop/TUP-InfantryVision-2022-main/log/info");  //设置日志级别
-    google::SetLogDestination(google::GLOG_WARNING,"/home/icbk/Desktop/TUP-InfantryVision-2022-main/log/warning");
-    google::SetLogDestination(google::GLOG_ERROR,"/home/icbk/Desktop/TUP-InfantryVision-2022-main/log/error");
+    google::SetLogDestination(google::GLOG_INFO,"/home/icbk/Desktop/TUP-InfantryVision-2022-main/log/info/");  //设置日志级别
+    google::SetLogDestination(google::GLOG_WARNING,"/home/icbk/Desktop/TUP-InfantryVision-2022-main/log/warning/");
+    google::SetLogDestination(google::GLOG_ERROR,"/home/icbk/Desktop/TUP-InfantryVision-2022-main/log/error/");
 #endif //SAVE_MAIN_LOG
 
     auto time_start = std::chrono::steady_clock::now();

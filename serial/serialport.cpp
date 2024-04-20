@@ -348,8 +348,7 @@ int SerialPort::set_Bit()
  *@param   flag   类型  char   用于判断是否瞄准目标，0代表没有，1代表已经瞄准
  */
 void SerialPort::TransformData(const VisionData &data)
-{
-
+{                           
     Tdata[0] = 0xA5;
 
     Tdata[1] = CmdID1;
@@ -374,6 +373,24 @@ void SerialPort::TransformData(const VisionData &data)
 
     Tdata[17] = data.isSpinning;
     Tdata[18] = data.ismiddle;
+    // Tdata[3] = 0;
+    // Tdata[4] = 0;
+    // Tdata[5] = 0;
+    // Tdata[6] = 0;
+    // Tdata[7] = 0;
+    // Tdata[8] = 0;
+    // Tdata[9] = 0;
+    // Tdata[10] = 0;
+
+    // Tdata[11] = 0;
+    // Tdata[12] = 0;
+    // Tdata[13] = 0;
+    // Tdata[14] = 0;
+    // Tdata[15] = data.isSwitched;
+	// Tdata[16] = data.isFindTarget;
+
+    // Tdata[17] = data.isSpinning;
+    // Tdata[18] = data.ismiddle;
     Tdata[19] = 0x00;
 
 	Append_CRC16_Check_Sum(Tdata, 22);
@@ -410,10 +427,13 @@ bool SerialPort::getQuat(unsigned char *data)
     unsigned char* f2 = &data[4];
     unsigned char* f3 = &data[8];
     unsigned char* f4 = &data[12];
-
+    //帧头
     quat[0] = exchange_data(f1);
+    //pitch
     quat[1] = exchange_data(f2);
+    //yaw
     quat[2] = exchange_data(f3);
+    //距离
     quat[3] = exchange_data(f4);
     //fmt::print(fmt::fg(fmt::color::white), "quat: {} {} {} {} \n", quat[0], quat[1], quat[2], quat[3]);
     return true;

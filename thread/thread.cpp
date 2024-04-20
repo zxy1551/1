@@ -345,8 +345,8 @@ bool dataReceiver(SerialPort &serial, MessageFilter<MCUData> &receive_factory, s
         
         // int mode = 2;
         Eigen::Quaterniond quat = {serial.quat[0],serial.quat[1],serial.quat[2],serial.quat[3]};
-        Eigen::Vector3d acc = {serial.acc[0],serial.acc[1],serial.acc[2]};;
-        Eigen::Vector3d gyro = {serial.gyro[0],serial.gyro[1],serial.gyro[2]};;
+        Eigen::Vector3d acc = {serial.acc[0],serial.acc[1],serial.acc[2]};
+        Eigen::Vector3d gyro = {serial.gyro[0],serial.gyro[1],serial.gyro[2]};
         MCUData mcu_status = {mode, acc, gyro, quat, bullet_speed, timestamp};
         receive_factory.produce(mcu_status, timestamp);
         // Eigen::Vector3d vec = quat.toRotationMatrix().eulerAngles(2,1,0);

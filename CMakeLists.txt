@@ -12,6 +12,7 @@ set(ngraph_LIBRARIES "/opt/intel/opencvino_2021.4.752./openvino_2021.4.752/infer
 #set(CMAKE_PREFIX_PATH "/opt/intel/opencvino_2021.4.752./openvino_2021/deployment_tools/ngraph/cmake")
 # set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --std=c++17 -pthread")
 #set(CMAKE_PREFIX_PATH /opt/intel/opencvino_2021.4.752./openvino_2021/inference_engine)
+#set(CMAKE_EXPORT_COMPILECOMMANDS ON)
 find_package(OpenCV 4.5.0)
 set(InferenceEngine_DIR "/opt/intel/opencvino_2021.4.752./openvino_2021/deployment_tools/inference_engine/share")
 find_package(InferenceEngine REQUIRED)

@@ -1082,14 +1082,7 @@ bool Autoaim::run(TaskData &src,VisionData &data)
         LOG(ERROR)<<"NAN Detected! Data Transmit Aborted!";
         return false;
     }
-//判断是否到达开火范围
-    if(angle[1] <= src.quat[1] && angle[0] <= src.quat[2])
-    {
-        auto ismiddle = 1;
-    }
-    else
-        auto ismiddle = 0;
-    
-    data = {(float)angle[1], (float)angle[0], (float)target.center3d_cam.norm(), is_target_switched, 1, is_target_spinning, ismiddle};
+
+    data = {(float)angle[1], (float)angle[0], (float)target.center3d_cam.norm(), is_target_switched, 1, is_target_spinning, 1};
     return true;
 } 

@@ -6,11 +6,11 @@
 #include "debug.h"
 
 //DaHengCamera DaHeng;
-//const string SERIAL_ID = "483/5740/200";
+const string SERIAL_ID = "483/5740/200";//usb串口
 //const string SERIAL_ID = "1a86/7523/263";
 // const string SERIAL_ID = "10c4/ea60/100";
 
-const string SERIAL_ID = "1a86/7523/264";   //ch340
+//const string SERIAL_ID = "1a86/7523/264";   //ch340
 //const string SERIAL_ID = "403/6001/600";//ft232，贵
 const int BAUD = 115200;
 // const int BAUD_IMU = 460800;

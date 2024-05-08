@@ -85,7 +85,7 @@ target_link_libraries(Infantry_Vision ${OpenCV_LIBRARIES} ${InferenceEngine_LIBR
 find_library(MVS_LIB libMvCameraControl.so /opt/MVS/lib/64/)
 target_link_libraries(Infantry_Vision ${MVS_LIB})
 
-# set(LINK_DIR //home/icbk/intel/openvino_2021/deployment_tools/inference_engine/lib/intel64)
+# set(LINK_DIR /home/icbk/intel/openvino_2021/deployment_tools/inference_engine/lib/intel64)
 
 # link_directories(${LINK_DIR})
 

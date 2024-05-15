@@ -35,7 +35,7 @@ int main(int argc,char* argv[])
     auto time_start = std::chrono::steady_clock::now();
     Factory<TaskData> task_factory(3);
     Factory<VisionData> data_transmit_factory(5);
-    MessageFilter<MCUData> data_receiver(100);
+    MessageFilter<MCUData> data_receiver(1000);
     SerialPort serial(SERIAL_ID, BAUD);
     
 #ifdef USING_IMU_C_BOARD

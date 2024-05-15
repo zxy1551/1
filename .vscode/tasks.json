@@ -61,7 +61,7 @@
             ]
         },
         {
-            "label": "make", //执行make
+            "label": "make  -j8", //执行make
             "group": {
                 "kind": "build",
                 "isDefault": true

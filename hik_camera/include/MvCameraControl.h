@@ -2642,6 +2642,7 @@ MV_CAMCTRL_API int __stdcall MV_CC_TriggerSoftwareExecute(IN void* handle);
  *  @param  handle                      [IN]        相机句柄
  *  @param  pstValue                    [IN][OUT]   返回给调用者的有关Gamma类型的信息结构体指针
  *  @return 成功,返回#MV_OK,并获得相应参数信息的结构体, 失败, 返回错误码
+ *  @return 成功,返回#MV_OK,并获得相应参数信息的结构体, 失败, 返回错误码
  *  @remarks 可参照接口MV_CC_GetPixelFormat，参考 CameraParams.h 中的 MV_CAM_GAMMA_SELECTOR 定义
  
  *  @~english

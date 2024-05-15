@@ -301,6 +301,13 @@ bool HaiKangCamera::Set_BALANCE(int value, unsigned int value_number)
     return true;
 }
 
+// typedef enum _MV_CAM_GAMMA_SELECTOR_
+// {
+//     MV_GAMMA_SELECTOR_USER      = 1,
+//     MV_GAMMA_SELECTOR_SRGB      = 2,
+
+// }MV_CAM_GAMMA_SELECTOR;
+
 bool HaiKangCamera::Set_Gamma(bool set_status,double dGammaParam)
 {   //设置Gamma值
     if(set_status == true)

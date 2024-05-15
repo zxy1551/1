@@ -44,18 +44,18 @@ G_DAHENG
 
     HaiKang.StartDevice(0);
     // 设置分辨率
-    HaiKang.SetResolution(1440, 1080);
+    HaiKang.SetResolution(1280, 1024);
     //更新时间戳，设置时间戳偏移量
     HaiKang.UpdateTimestampOffset(time_start);
     // 开始采集帧
     HaiKang.SetStreamOn();
     // 设置曝光事件
-    HaiKang.SetExposureTime(10000);
+    HaiKang.SetExposureTime(1000);
     // 设置1
     // HaiKang.SetGAIN(0, 16);
     // HaiKang.SetGAIN(1, 8);
     // HaiKang.SetGAIN(2, 8);
-    HaiKang.SetGAIN(1, 17);
+    HaiKang.SetGAIN(0, 2);
     // 是否启用自动白平衡7
     // HaiKang.Set_BALANCE_AUTO(0);
     // manual白平衡 BGR->012

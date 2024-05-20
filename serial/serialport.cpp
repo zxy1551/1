@@ -455,7 +455,7 @@ bool SerialPort::getGyro(unsigned char *data)
     gyro[1] = exchange_data(f2);
     gyro[2] = exchange_data(f3);
 
-    //fmt::print(fmt::fg(fmt::color::white), "gyro: {} {} {} \n", gyro[0], gyro[1], gyro[2]);
+    fmt::print(fmt::fg(fmt::color::white), "gyro: {} {} {} \n", gyro[0], gyro[1], gyro[2]);
     return true;
 }
 
@@ -474,7 +474,7 @@ bool SerialPort::getAcc(unsigned char *data)
     acc[0] = exchange_data(f1);
     acc[1] = exchange_data(f2);
     acc[2] = exchange_data(f3);
-   // fmt::print(fmt::fg(fmt::color::white), "acc: {} {} {} \n", acc[0], acc[1], acc[2]);
+   fmt::print(fmt::fg(fmt::color::white), "acc: {} {} {} \n", acc[0], acc[1], acc[2]);
     return true;
 }
 /**
@@ -489,7 +489,7 @@ bool SerialPort::getSpeed(unsigned char *data)
 
     bullet_speed = exchange_data(f1);
 
-    //fmt::print(fmt::fg(fmt::color::white), "speed: {} \n", bullet_speed);
+    fmt::print(fmt::fg(fmt::color::white), "speed: {} \n", bullet_speed);
     return true;
 }
 //////////////////////////////////////////////
